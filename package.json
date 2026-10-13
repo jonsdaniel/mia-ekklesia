@@ -10,7 +10,7 @@
     "build": "node scripts/generate-static-routes.mjs && node scripts/prepare-build.mjs && vite build && node scripts/finalize-static-build.mjs",
     "start": "npm run dev",
     "test": "npm run build && node --test tests/static-site.test.mjs",
-    "lint": "node --check site/assets/catalog.js && node --check site/assets/article-render.js && node --check site/assets/section-render.js && node --check site/assets/site.js",
+    "lint": "node --check site/assets/catalog.js && node --check site/assets/expanded-articles.js && node --check site/assets/article-render.js && node --check site/assets/section-render.js && node --check site/assets/site.js",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

@@ -21,7 +21,7 @@
   }
 
   const detail = articles[kind]?.[slug] || defaultDetail(record, kind);
-  document.title = `${record.title} — Μία Ἐκκλησία`;
+  document.title = `${record.title} — Mia Ekklesia`;
   document.querySelector('meta[name="description"]')?.setAttribute("content", record.summary);
 
   if (kind === "questions") {
@@ -31,7 +31,6 @@
 
   const contextLabel = kind === "miracles" ? "Vindicatory miracles" : record.period.title;
   const indexHref = kind === "miracles" ? "/miracles/" : `/doctrines/#${record.period.id}`;
-  const readingTime = kind === "miracles" ? "Approx. 4–5 min." : "Approx. 5–7 min.";
   const sourceCredit = detail.credit || detail.authorNote;
   const articleSections = detail.sections.map((section, index) => sectionMarkup(section, index)).join("");
   const primarySources = record.sources || [];
@@ -43,7 +42,7 @@
       <article class="article-page">
         <header class="article-hero">
           <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a><span>/</span><a href="${indexHref}">${contextLabel}</a></nav>
-          <div class="article-meta"><span>${record.date}</span><span>${record.category}</span><span>${readingTime}</span></div>
+          <div class="article-meta"><span>${record.date}</span><span>${record.category}</span></div>
           <h1>${record.title}</h1>
           <p class="article-question">${record.question}</p>
           <p class="article-thesis">${detail.thesis}</p>
@@ -153,12 +152,12 @@ function pagerMarkup(records, slug, kind) {
 function headerMarkup(active) {
   const link = (href, label, key) => `<a href="${href}"${active === key ? ' aria-current="page"' : ""}>${label}</a>`;
   return `<header class="site-header">
-    <a class="brand" href="/" aria-label="Μία Ἐκκλησία, home"><span class="brand-mark" aria-hidden="true">☩</span><span><b lang="grc">Μία Ἐκκλησία</b><small>One Church</small></span></a>
+    <a class="brand" href="/" aria-label="Mia Ekklesia, home"><span class="brand-mark" aria-hidden="true"><img src="/assets/jerusalem-cross.png" alt=""></span><span><b>Mia Ekklesia</b><small>One Church</small></span></a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
     <nav id="primary-nav" class="primary-nav" aria-label="Primary navigation">${link("/doctrines/", "Doctrines", "doctrines")}${link("/miracles/", "Miracles", "miracles")}${link("/questions/", "Questions", "questions")}${link("/method/", "Method &amp; Sources", "method")}</nav>
   </header>`;
 }
 
 function footerMarkup() {
-  return `<footer class="site-footer"><div class="footer-brand"><span aria-hidden="true">☩</span><div><b lang="grc">Μία Ἐκκλησία</b><small>One Church</small></div></div><nav aria-label="Footer navigation"><a href="/doctrines/">Doctrines</a><a href="/miracles/">Miracles</a><a href="/questions/">Questions</a><a href="/method/">Method &amp; Sources</a></nav><p>Ad fontes: to Scripture, the Fathers, the councils, and the historical record.</p></footer>`;
+  return `<footer class="site-footer"><div class="footer-brand"><img class="footer-cross" src="/assets/jerusalem-cross.png" alt=""><div><b>Mia Ekklesia</b><small>One Church</small></div></div><nav aria-label="Footer navigation"><a href="/doctrines/">Doctrines</a><a href="/miracles/">Miracles</a><a href="/questions/">Questions</a><a href="/method/">Method &amp; Sources</a></nav><p>Ad fontes: to Scripture, the Fathers, the councils, and the historical record.</p></footer>`;
 }
