@@ -1,16 +1,16 @@
 {
-  "name": "site-creator-vinext-starter",
+  "name": "mia-ekklesia",
   "version": "0.1.0",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
-    "build": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
-    "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
-    "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
+    "dev": "node scripts/generate-static-routes.mjs && vite --host 127.0.0.1",
+    "build": "node scripts/generate-static-routes.mjs && node scripts/prepare-build.mjs && vite build && node scripts/finalize-static-build.mjs",
+    "start": "npm run dev",
+    "test": "npm run build && node --test tests/static-site.test.mjs",
+    "lint": "node --check site/assets/catalog.js && node --check site/assets/article-render.js && node --check site/assets/section-render.js && node --check site/assets/site.js",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
