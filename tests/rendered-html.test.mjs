@@ -18,11 +18,11 @@ test("server-renders the historical journey", async () => {
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
   const html = await response.text();
-  assert.match(html, /<title>Upon this Rock — The Case, in History<\/title>/i);
-  assert.match(html, /Walk through the story/);
+  assert.match(html, /<title>Upon this Rock — A Historical Case for the Catholic Church<\/title>/i);
+  assert.match(html, /The case for the/);
   assert.match(html, /The Apostolic Age/);
   assert.match(html, /The canon/);
-  assert.match(html, /Questions &amp; objections/);
+  assert.match(html, /Questions and objections/);
   assert.doesNotMatch(html, /codex-preview|react-loading-skeleton/);
 });
 
@@ -32,11 +32,12 @@ test("removes starter-only assets and includes the social card", async () => {
     readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
     readFile(new URL("../package.json", import.meta.url), "utf8"),
   ]);
-  assert.match(page, /Apostolic succession/);
-  assert.match(page, /The Miracle of the Sun/);
-  assert.match(layout, /\/og\.png/);
+  assert.match(page, /apostolic succession/i);
+  assert.match(page, /Fátima and the Miracle of the Sun/);
+  assert.match(page, /The Church is Called Catholic/);
+  assert.match(layout, /\/og-v2\.png/);
   assert.doesNotMatch(packageJson, /react-loading-skeleton/);
-  await access(new URL("../public/og.png", import.meta.url));
+  await access(new URL("../public/og-v2.png", import.meta.url));
   await assert.rejects(access(new URL("../app/_sites-preview/SkeletonPreview.tsx", import.meta.url)));
   await assert.rejects(access(new URL("../app/_sites-preview/preview.css", import.meta.url)));
 });
