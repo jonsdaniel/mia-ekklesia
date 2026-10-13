@@ -85,16 +85,6 @@ jobs:
               );
 
               source = source.replaceAll(
-                'href="/${section}/${article.slug}/"',
-                'href="' + prefix + '/${section}/${article.slug}/"'
-              );
-
-              source = source.replace(
-                'const parts = window.location.pathname.split("/").filter(Boolean);',
-                'const parts = window.location.pathname.replace(/^\\/mia-ekklesia(?=\\/|$)/, "").split("/").filter(Boolean);'
-              );
-
-              source = source.replaceAll(
                 "https://upon-this-rock.jonsdaniel.chatgpt.site/og.png",
                 "https://jonsdaniel.github.io/mia-ekklesia/og.png"
               );

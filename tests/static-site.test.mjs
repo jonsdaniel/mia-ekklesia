@@ -64,6 +64,17 @@ test("the deployment output contains the worker and all static routes", async ()
   await access(new URL("dist/client/og.png", projectRoot));
 });
 
+test("article links remain valid when the site is hosted below a project path", async () => {
+  const sectionRenderer = await readFile(new URL("assets/section-render.js", siteRoot), "utf8");
+  const articleRenderer = await readFile(new URL("assets/article-render.js", siteRoot), "utf8");
+
+  assert.match(sectionRenderer, /href="\.\/\$\{article\.slug\}\//);
+  assert.match(sectionRenderer, /href="\.\/\$\{question\.slug\}\//);
+  assert.doesNotMatch(sectionRenderer, /href="\/\$\{section\}/);
+  assert.match(articleRenderer, /const kind = parts\.at\(-2\)/);
+  assert.match(articleRenderer, /const slug = parts\.at\(-1\)/);
+});
+
 test("representative detail pages have route-specific social metadata", async () => {
   const doctrine = await readFile(new URL("doctrines/catholic-name/index.html", siteRoot), "utf8");
   const miracle = await readFile(new URL("miracles/fatima/index.html", siteRoot), "utf8");

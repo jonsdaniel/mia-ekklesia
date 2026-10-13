@@ -1,8 +1,8 @@
 (function renderArticle() {
   const root = document.querySelector("#article-root");
   const parts = window.location.pathname.split("/").filter(Boolean);
-  const kind = parts[0];
-  const slug = parts[1];
+  const kind = parts.at(-2);
+  const slug = parts.at(-1);
   const catalog = window.SITE_CATALOG;
   const articles = window.SITE_ARTICLES;
 
